@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Car;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class IndexController {
     }
 
     @PostMapping("/enviar")
-    public ResponseEntity<String> criarCarro(@RequestBody Car carro) {
+    public ResponseEntity<String> criarCarro(@RequestBody @Valid Car carro) {
         this.ultimoCarro = carro;
         return ResponseEntity.ok("Carro armazenado com sucesso!");
     }

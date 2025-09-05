@@ -1,13 +1,17 @@
-package com.example.demo.model;
+package com.example.demo.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class Car {
-    @Size(min = 1, message = "no mínimo 1 letra")
+public class CarDTO {
+    @NotBlank(message = "O nome é obrigatório.")
+    @Size(min = 3, max = 50, message = "O nome deve ter entre 3 e 50 caracteres.")
     private String name;
 
+    @NotBlank(message = "A cor é obrigatória.")
     private String color;
 
+    // Getters e Setters
     public String getName() {
         return name;
     }
