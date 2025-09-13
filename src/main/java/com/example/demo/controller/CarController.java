@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class CarController {
-
     @GetMapping("/index")
     public String exibirFormulario(Model model) {
         model.addAttribute("carDTO", new CarDTO());
@@ -35,6 +34,5 @@ public class CarController {
     public String sucesso() {
         return "sucesso";
     }
-
 }
 

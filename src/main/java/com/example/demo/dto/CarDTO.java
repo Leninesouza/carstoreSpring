@@ -8,6 +8,8 @@ public class CarDTO {
     @Size(min = 3, max = 50, message = "O nome deve ter entre 3 e 50 caracteres.")
     private String name;
 
+    private String id;
+
     @NotBlank(message = "A cor é obrigatória.")
     private String color;
 
@@ -27,4 +29,11 @@ public class CarDTO {
     public void setColor(String color) {
         this.color = color;
     }
+    public String getId() {
+    return id;}
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }
+
