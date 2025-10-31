@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
 
+import com.example.demo.DAO.CarDAO;
 import com.example.demo.dto.CarDTO;
+import com.example.demo.model.Car;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,43 +13,36 @@ import java.util.UUID;
 
 @Service
 public class CarServiceImpl implements CarService {
-    private final List<CarDTO> carList;
 
-    public CarServiceImpl() {
-        this.carList = new ArrayList<>();
+    @Autowired
+    private final CarDAO carJpaDao;
+
+    public CarServiceImpl(CarDAO carDao) {
+        this.carJpaDao = carDao;
     }
 
+    @Override
     public List<CarDTO> findAll() {
-        return this.carList;
+        return carJpaDao.findAll();
     }
 
+    @Override
     public void save(CarDTO carDTO) {
-        if (carDTO.getId() == null) {
-            carDTO.setId(UUID.randomUUID().toString());
-        }
-        this.carList.add(carDTO);
+        carJpaDao.save(carDTO);
     }
 
+    @Override
     public void deleteById(String id) {
-        this.carList.removeIf(car -> car.getId().equals(id));
+        carJpaDao.deleteById(id);
     }
 
+    @Override
     public void update(String id, CarDTO carDTO) {
-        this.carList.replaceAll(car -> {
-            if (car.getId().equals(id)) {
-                carDTO.setId(id);
-                return carDTO;
-            }
-            return car;
-        });
+        carJpaDao.update(id, carDTO);
     }
+
 
     public CarDTO findById(String id) {
-        for (CarDTO car : carList) {
-            if (car.getId().equals(id)) {
-                return car;
-            }
-        }
-        return null;
+        return carJpaDao.findById(id);
     }
 }
